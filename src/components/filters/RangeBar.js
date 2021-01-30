@@ -11,40 +11,44 @@ class RangeBar extends React.Component {
     const [minimum, maximum] = ageRange;
 
     return (
-      <div>
-        <label for="range-selector-min">Min Age: {minimum}</label>
-        <input
-          value={minimum}
-          name="range-selector-min"
-          class="range-selector-min"
-          type="range"
-          min="0"
-          max="100"
-          onChange={(e) => {
-            const newValue = Number(e.target.value);
+      <div className="filter-input">
+        <div>
+          <label for="range-selector-min">Min Age: {minimum}</label>
+          <input
+            value={minimum}
+            name="range-selector-min"
+            class="range-selector-min"
+            type="range"
+            min="0"
+            max="100"
+            onChange={(e) => {
+              const newValue = Number(e.target.value);
 
-            if (newValue < maximum) {
-              handleAgeRange(newValue, maximum);
-            }
-          }}
-        />
+              if (newValue < maximum) {
+                handleAgeRange(newValue, maximum);
+              }
+            }}
+          />
+        </div>
 
-        <label for="range-selector-max">Max Age: {maximum}</label>
-        <input
-          value={maximum}
-          name="range-selector-max"
-          class="range-selector-max"
-          type="range"
-          min="0"
-          max="100"
-          onChange={(e) => {
-            const newValue = Number(e.target.value);
+        <div>
+          <label for="range-selector-max">Max Age: {maximum}</label>
+          <input
+            value={maximum}
+            name="range-selector-max"
+            class="range-selector-max"
+            type="range"
+            min="0"
+            max="100"
+            onChange={(e) => {
+              const newValue = Number(e.target.value);
 
-            if (newValue > minimum) {
-              handleAgeRange(minimum, newValue);
-            }
-          }}
-        />
+              if (newValue > minimum) {
+                handleAgeRange(minimum, newValue);
+              }
+            }}
+          />
+        </div>
       </div>
     );
   }

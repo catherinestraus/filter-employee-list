@@ -12,8 +12,11 @@ class SearchBar extends React.Component {
   render() {
     const { value } = this.state;
     return (
-      <div id="search-bar">
+      <div className="filter-input">
         <input
+          id="search-bar"
+          autoFocus
+          placeholder="Search for employee..."
           value={value}
           type="text"
           onChange={(e) => {

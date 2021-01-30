@@ -1,10 +1,8 @@
-import "./App.css";
 import React from "react";
 import employees from "./data";
 import SearchBar from "./components/filters/SearchBar";
 import RangeBar from "./components/filters/RangeBar";
 import DepartmentBar from "./components/filters/DepartmentBar";
-
 import EmployeeList from "./components/EmployeeList";
 
 class App extends React.Component {
@@ -44,53 +42,52 @@ class App extends React.Component {
   render() {
     const { search, employees, ageRange, department } = this.state;
 
-    // filter name
-    let filter1 = [];
+    let filteredByName = [];
     if (search.length > 0) {
       for (let i = 0; i < employees.length; i++) {
         let employee = employees[i];
         if (employee.name.toLowerCase().includes(search.toLowerCase())) {
-          filter1.push(employee);
+          filteredByName.push(employee);
         }
       }
     } else {
-      filter1 = employees.slice();
+      filteredByName = employees.slice();
     }
 
-    // filter age
-    let filter2 = [];
+    let filteredByAge = [];
     if (ageRange[0] !== 0 || ageRange[1] !== 100) {
-      for (let i = 0; i < filter1.length; i++) {
-        let employee = filter1[i];
+      for (let i = 0; i < filteredByName.length; i++) {
+        let employee = filteredByName[i];
         if (employee.age >= ageRange[0] && employee.age <= ageRange[1]) {
-          filter2.push(employee);
+          filteredByAge.push(employee);
         }
       }
     } else {
-      filter2 = filter1;
+      filteredByAge = filteredByName;
     }
 
-    // filter department
-    let filter3 = [];
+    let filteredByDepartment = [];
     if (department.length > 0) {
-      for (let i = 0; i < filter2.length; i++) {
-        let employee = filter2[i];
+      for (let i = 0; i < filteredByAge.length; i++) {
+        let employee = filteredByAge[i];
         if (employee.department === department) {
-          filter3.push(employee);
+          filteredByDepartment.push(employee);
         }
       }
     } else {
-      filter3 = filter2;
+      filteredByDepartment = filteredByAge;
     }
 
     return (
-      <div>
-        <div id="title"> Search Employees </div>
-        <SearchBar handleSearch={this.handleSearch} />
-        <RangeBar ageRange={ageRange} handleAgeRange={this.handleAgeRange} />
-        <DepartmentBar handleDepartment={this.handleDepartment} />
+      <div id="container">
+        <div id="filters">
+          <div id="title"> Find Employees </div>
+          <SearchBar handleSearch={this.handleSearch} />
+          <RangeBar ageRange={ageRange} handleAgeRange={this.handleAgeRange} />
+          <DepartmentBar handleDepartment={this.handleDepartment} />
+        </div>
 
-        <EmployeeList employees={filter3} />
+        <EmployeeList employees={filteredByDepartment} />
       </div>
     );
   }

@@ -14,25 +14,27 @@ class DepartmentBar extends React.Component {
   render() {
     const { value } = this.state;
     return (
-      <select
-        value={value}
-        id="categories"
-        onChange={(e) => {
-          const newValue = e.target.value;
-          this.setState({
-            value: newValue,
-          });
-          this.props.handleDepartment(newValue);
-        }}
-      >
-        <option value="">Select Department</option>
+      <div className="filter-input">
+        <select
+          value={value}
+          id="categories"
+          onChange={(e) => {
+            const newValue = e.target.value;
+            this.setState({
+              value: newValue,
+            });
+            this.props.handleDepartment(newValue);
+          }}
+        >
+          <option value="">Select Department</option>
 
-        {DepartmentBar.TYPES.map((department, i) => (
-          <option value={department} key={i}>
-            {department}
-          </option>
-        ))}
-      </select>
+          {DepartmentBar.TYPES.map((department, i) => (
+            <option value={department} key={i}>
+              {department}
+            </option>
+          ))}
+        </select>
+      </div>
     );
   }
 }
